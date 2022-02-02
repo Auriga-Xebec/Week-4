@@ -21,5 +21,5 @@ get_num()
 }
 
 get_num 1 10
-num=$?
-echo -e "\n$num" 
+
+echo $guess
