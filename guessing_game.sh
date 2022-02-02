@@ -6,8 +6,7 @@
 ### Greater than 42 print "Too High!"
 ### Rpt the game until the correct number is found.
 
-#------------------------------------NOT MY CODE------------------------------------------------#
-printError() 
+print_error() 
       
 { 
       
@@ -15,43 +14,27 @@ printError()
       
 } 
       
- 
       
-#This function will get a value between the 2nd and 3rd arguments 
-      
-getNumber() 
-      
-{ 
-      
-    read -p "$1: " 
-    
-    
-      
-    while (( $REPLY < $2 || $REPLY> $3 )); do 
-      
-        printError "Input must be between $2 and $3" 
-        read -p "$1: "
-        if [ $REPLY > $2 || $REPLY< $3 ]; then
-            var=$REPLY
-            echo $var
-            break
-        fi    
-        
-    done 
-    return 
-      
-} 
-
-var_test()
+get_num()
 {
-    return $1
+    echo "enter a number between $1 and $2: "
+    read guess
+    while (( $guess < $1 || $guess > $2 )); do
+        print_error "enter a number between $1 and $2: "
+        read guess      
+    done
 }
+get_num 1 100
+while (( $guess != 42 ));do
+    if [ $guess > 42 ]; then
+        echo "$guess is too low!"
+        get_num 1 100
+        continue
+    elif [ $guess < 42 ]; then
+        echo "$guess is too high!"
+        get_num 1 100
+        continue
+    fi  
+done
 
-
-#---------------------------------------------------------------------------------------------#
-
-getNumber "please type a number between 1 and 100" 1 100 
-
-var1=$?
-
-echo -e "\n\n" $var1
+echo -e "\033[32m$guess is correct!\e[0m"
