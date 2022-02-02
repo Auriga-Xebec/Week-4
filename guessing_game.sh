@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+### 202202021200 --> changed to -lt and -gt bevcause i do not understand basic math
+
 ### Prompt for a number between 1 and 100
 ### If the number is 42 print correct
 ### less than 42 print "Too Low!"
@@ -24,14 +27,17 @@ get_num()
         read guess      
     done
 }
+
+
 get_num 1 100
+
 while (( $guess != 42 ));do
-    if [ $guess > 42 ]; then
-        echo "$guess is too low!"
+    if [ $guess -lt 42 ]; then
+        echo -e "\033[34m$guess is too low!\e[0m"
         get_num 1 100
         continue
-    elif [ $guess < 42 ]; then
-        echo "$guess is too high!"
+    elif [ $guess -gt 42 ]; then
+        echo -e "\033[31m$guess is too high!\e[0m"
         get_num 1 100
         continue
     fi  
